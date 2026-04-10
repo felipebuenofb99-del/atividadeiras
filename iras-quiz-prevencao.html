@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRAS · Revisão de Medidas Preventivas — FHO</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f0f0f0;
+  --white: #ffffff;
+  --slate-50: #f8f8f8;
+  --slate-100: #eeeeee;
+  --slate-300: #cccccc;
+  --slate-500: #888888;
+  --slate-700: #444444;
+  --slate-900: #1a1a1a;
+
+  --isc:   #0D7C6A;
+  --isc-l: #e6f4f1;
+  --isc-d: #084f44;
+  --pav:   #3730A3;
+  --pav-l: #eeeef9;
+  --pav-d: #1e1b6e;
+  --itu:   #B45309;
+  --itu-l: #fef3e2;
+  --itu-d: #7c3a05;
+  --ips:   #B91C1C;
+  --ips-l: #fef2f2;
+  --ips-d: #7f1212;
+  --mix:   #5B21B6;
+  --mix-l: #f2eeff;
+  --mix-d: #3b1280;
+
+  --accent: var(--mix);
+  --accent-l: var(--mix-l);
+  --accent-d: var(--mix-d);
+
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 2px 16px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.13);
+  --font-h: 'DM Serif Display', serif;
+  --font-b: 'DM Sans', sans-serif;
+  --transition: 0.22s ease;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family: var(--font-b);
+  background: var(--bg);
+  color: var(--slate-900);
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ── SCREEN SYSTEM ── */
+.screen { display:none; min-height:100vh; }
+.screen.active { display:flex; }
+
+/* ════════════════════════════════════
+   LOGIN
+════════════════════════════════════ */
+#s-login {
+  align-items: center;
+  justify-content: center;
+  background: #111;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.login-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #0f0f1a 0%, #1a0d2e 40%, #0d1f1a 100%);
+}
+.login-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.login-card {
+  position: relative; z-index: 2;
+  background: #fff;
+  border-radius: 20px;
+  padding: 52px 48px;
+  max-width: 460px;
+  width: 100%;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+  animation: fadeUp .5s ease;
+}
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.lc-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #f2eeff; color: #5B21B6;
+  border-radius: 999px; padding: 5px 14px;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .6px; text-transform: uppercase;
+  margin-bottom: 22px;
+}
+.lc-title {
+  font-family: var(--font-h);
+  font-size: 30px; line-height: 1.15;
+  color: #111; margin-bottom: 6px;
+}
+.lc-sub {
+  font-size: 13.5px; color: var(--slate-500);
+  margin-bottom: 34px; line-height: 1.5;
+}
+.field { margin-bottom: 18px; }
+.field label {
+  display: block; font-size: 12px; font-weight: 700;
+  color: var(--slate-700); margin-bottom: 6px;
+  letter-spacing: .3px; text-transform: uppercase;
+}
+.field input {
+  width: 100%; padding: 13px 16px;
+  border: 2px solid var(--slate-100); border-radius: 10px;
+  font-family: var(--font-b); font-size: 15px; color: #111;
+  background: #fafafa; outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.field input:focus {
+  border-color: #5B21B6;
+  box-shadow: 0 0 0 3px rgba(91,33,182,.12);
+  background: #fff;
+}
+.field input.err { border-color: #B91C1C; }
+.field-err { display:none; font-size:11.5px; color:#B91C1C; margin-top:5px; }
+.field-err.show { display:block; }
+.btn-enter {
+  width: 100%; padding: 15px;
+  background: linear-gradient(135deg, #3b1280, #5B21B6);
+  color: #fff; border: none; border-radius: 11px;
+  font-family: var(--font-b); font-size: 16px; font-weight: 700;
+  cursor: pointer; margin-top: 6px;
+  transition: transform .15s, box-shadow .15s;
+  letter-spacing: .2px;
+}
+.btn-enter:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(91,33,182,.35); }
+.btn-enter:active { transform:translateY(0); }
+.lc-footer {
+  margin-top: 22px; text-align:center;
+  font-size: 12px; color: var(--slate-500);
+}
+
+/* ════════════════════════════════════
+   SELECTION
+════════════════════════════════════ */
+#s-select {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 48px 24px;
+  background: var(--bg);
+}
+.select-header {
+  text-align: center; margin-bottom: 44px; max-width: 540px;
+}
+.select-header .hi {
+  display: inline-block;
+  background: rgba(91,33,182,.1); color: #5B21B6;
+  border-radius: 999px; padding: 5px 16px;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: .5px; text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.select-header h2 {
+  font-family: var(--font-h);
+  font-size: 32px; color: #111; line-height: 1.2;
+  margin-bottom: 10px;
+}
+.select-header p { font-size: 15px; color: var(--slate-500); }
+.student-bar {
+  display: flex; align-items: center; gap: 10px;
+  background: #fff; border-radius: 999px;
+  padding: 8px 18px; margin-bottom: 40px;
+  box-shadow: var(--shadow);
+}
+.student-bar .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #0D7C6A; flex-shrink: 0;
+}
+.student-bar span { font-size: 13px; color: var(--slate-700); font-weight: 500; }
+.student-bar span strong { color: #111; }
+.iras-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  max-width: 720px;
+  width: 100%;
+  margin-bottom: 18px;
+}
+.iras-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 28px 26px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: transform .2s, box-shadow .2s;
+  border-top: 4px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+.iras-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: currentColor;
+  transform: scaleX(0);
+  transition: transform .3s;
+  transform-origin: left;
+}
+.iras-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); }
+.iras-card:hover::after { transform:scaleX(1); }
+.iras-card.isc  { border-top-color: var(--isc);  color: var(--isc); }
+.iras-card.pav  { border-top-color: var(--pav);  color: var(--pav); }
+.iras-card.itu  { border-top-color: var(--itu);  color: var(--itu); }
+.iras-card.ips  { border-top-color: var(--ips);  color: var(--ips); }
+.ic-icon { font-size: 34px; margin-bottom: 14px; display: block; }
+.ic-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .8px;
+  text-transform: uppercase; opacity: .7; margin-bottom: 4px;
+}
+.ic-title {
+  font-family: var(--font-h);
+  font-size: 19px; color: #111; line-height: 1.25;
+  margin-bottom: 8px;
+}
+.ic-sub { font-size: 12.5px; color: var(--slate-500); line-height: 1.5; }
+.ic-count {
+  display: inline-block; margin-top: 12px;
+  font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border-radius: 999px;
+}
+.isc  .ic-count { background: var(--isc-l);  color: var(--isc); }
+.pav  .ic-count { background: var(--pav-l);  color: var(--pav); }
+.itu  .ic-count { background: var(--itu-l);  color: var(--itu); }
+.ips  .ic-count { background: var(--ips-l);  color: var(--ips); }
+.mix-card {
+  max-width: 720px; width: 100%;
+  background: linear-gradient(135deg, #1e1b6e, #3b1280, #084f44);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  cursor: pointer;
+  color: #fff;
+  display: flex; align-items: center; gap: 20px;
+  box-shadow: var(--shadow-lg);
+  transition: transform .2s, opacity .2s;
+}
+.mix-card:hover { transform:translateY(-3px); opacity:.93; }
+.mix-card .mix-icon { font-size: 36px; }
+.mix-card .mix-info {}
+.mix-card .mix-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .8px;
+  text-transform: uppercase; opacity: .7; margin-bottom: 3px;
+}
+.mix-card .mix-title {
+  font-family: var(--font-h); font-size: 20px; line-height: 1.2;
+}
+.mix-card .mix-sub { font-size: 12.5px; opacity: .75; margin-top: 4px; }
+.report-link {
+  margin-top: 22px; font-size: 13px; color: var(--slate-500);
+  cursor: pointer; text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.report-link:hover { color: #5B21B6; }
+
+/* ════════════════════════════════════
+   QUIZ
+════════════════════════════════════ */
+#s-quiz {
+  flex-direction: column;
+  background: var(--bg);
+  min-height: 100vh;
+}
+.quiz-topbar {
+  background: #fff;
+  border-bottom: 1px solid var(--slate-100);
+  padding: 0 24px;
+  display: flex; align-items: stretch;
+  height: 62px;
+  position: sticky; top: 0; z-index: 100;
+}
+.qtb-back {
+  display: flex; align-items: center;
+  padding: 0 16px 0 0;
+  border-right: 1px solid var(--slate-100);
+  cursor: pointer; gap: 6px;
+  font-size: 13px; font-weight: 600; color: var(--slate-500);
+  transition: color .2s;
+}
+.qtb-back:hover { color: #111; }
+.qtb-iras {
+  display: flex; align-items: center;
+  padding: 0 20px;
+  gap: 10px;
+}
+.qtb-dot { width:10px; height:10px; border-radius:50%; }
+.qtb-name { font-weight: 700; font-size: 14px; color: #111; }
+.qtb-type { font-size: 12px; color: var(--slate-500); }
+.qtb-progress {
+  margin-left: auto;
+  display: flex; align-items: center; gap: 14px;
+}
+.qtb-counter { font-size: 13px; color: var(--slate-500); font-weight: 500; }
+.progress-pills { display: flex; gap: 5px; }
+.pill {
+  width: 22px; height: 6px; border-radius: 999px;
+  background: var(--slate-100);
+  transition: background .3s;
+}
+.pill.done-c { background: #0D7C6A; }
+.pill.done-w { background: #B91C1C; }
+.pill.current { background: #5B21B6; opacity: .5; }
+
+.quiz-body {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 24px 80px;
+}
+.q-wrap {
+  max-width: 680px;
+  width: 100%;
+  animation: fadeQ .3s ease;
+}
+@keyframes fadeQ {
+  from { opacity:0; transform:translateY(10px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.q-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 13px; border-radius: 999px;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .5px; text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.q-tag.mc   { background: #eeeef9; color: #3730A3; }
+.q-tag.tf   { background: #fef3e2; color: #B45309; }
+.q-tag.case { background: #f2eeff; color: #5B21B6; }
+.case-box {
+  background: #fff8ee;
+  border-left: 4px solid #B45309;
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  font-size: 14.5px;
+  color: #555;
+  line-height: 1.75;
+  font-style: italic;
+}
+.q-text {
+  font-family: var(--font-h);
+  font-size: 22px;
+  color: #111;
+  line-height: 1.45;
+  margin-bottom: 26px;
+}
+.opts { display: flex; flex-direction: column; gap: 11px; margin-bottom: 20px; }
+.opt {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 15px 18px;
+  background: #fff;
+  border: 2px solid var(--slate-100);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color .18s, background .18s, transform .15s;
+  font-size: 15px;
+  color: var(--slate-700);
+  line-height: 1.5;
+}
+.opt:hover { border-color: #aaa; transform:translateX(2px); }
+.opt.sel  { border-color: #5B21B6; background: #f2eeff; color: #3b1280; }
+.opt.ok   { border-color: #0D7C6A; background: var(--isc-l); color: var(--isc-d); cursor:default; }
+.opt.err  { border-color: #B91C1C; background: var(--ips-l); color: var(--ips-d); cursor:default; }
+.opt.dis  { cursor:default; }
+.opt-key {
+  width: 30px; height: 30px; flex-shrink: 0;
+  border-radius: 8px; background: var(--slate-100);
+  display: flex; align-items:center; justify-content:center;
+  font-weight: 700; font-size: 13px;
+  color: var(--slate-500);
+  transition: background .18s, color .18s;
+}
+.opt.sel  .opt-key { background: #5B21B6; color: #fff; }
+.opt.ok   .opt-key { background: #0D7C6A; color: #fff; }
+.opt.err  .opt-key { background: #B91C1C; color: #fff; }
+.fb {
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: none;
+  animation: fadeQ .25s ease;
+  margin-bottom: 18px;
+}
+.fb.show { display: block; }
+.fb.ok { background: var(--isc-l); border: 1.5px solid #0D7C6A; }
+.fb.ng { background: var(--ips-l); border: 1.5px solid #B91C1C; }
+.fb-head {
+  font-weight: 700; font-size: 15px; margin-bottom: 7px;
+  display: flex; align-items: center; gap: 7px;
+}
+.fb.ok .fb-head { color: var(--isc-d); }
+.fb.ng .fb-head { color: var(--ips-d); }
+.fb-text { font-size: 14px; line-height: 1.7; color: var(--slate-700); }
+.btn-next {
+  display: none;
+  padding: 14px 32px;
+  background: #111;
+  color: #fff; border: none; border-radius: 11px;
+  font-family: var(--font-b); font-size: 15px; font-weight: 700;
+  cursor: pointer; letter-spacing: .2px;
+  transition: background .18s, transform .15s;
+  float: right;
+}
+.btn-next.show { display: inline-block; }
+.btn-next:hover { background: #333; transform:translateY(-1px); }
+.clearfix::after { content:''; display:table; clear:both; }
+
+/* ════════════════════════════════════
+   RESULT
+════════════════════════════════════ */
+#s-result {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 48px 24px;
+  background: var(--bg);
+}
+.result-card {
+  max-width: 620px; width: 100%;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  animation: fadeUp .4s ease;
+  margin-bottom: 20px;
+}
+.result-hero {
+  padding: 44px 40px;
+  text-align: center;
+  color: #fff;
+}
+.result-hero h3 {
+  font-family: var(--font-h);
+  font-size: 24px; margin-bottom: 24px;
+}
+.score-ring {
+  width: 110px; height: 110px; border-radius: 50%;
+  border: 4px solid rgba(255,255,255,.3);
+  background: rgba(255,255,255,.1);
+  display: flex; flex-direction: column;
+  align-items:center; justify-content:center;
+  margin: 0 auto 20px;
+}
+.score-ring .sn {
+  font-family: var(--font-h); font-size: 38px;
+  line-height: 1;
+}
+.score-ring .sd { font-size: 13px; opacity: .7; }
+.result-msg { font-size: 15px; opacity: .88; line-height: 1.6; }
+.result-body { padding: 32px 36px; }
+.q-review { margin-bottom: 14px; }
+.q-review-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--slate-100);
+  font-size: 13.5px;
+}
+.q-review-item:last-child { border-bottom: none; }
+.q-rev-icon { font-size: 16px; flex-shrink:0; margin-top: 1px; }
+.q-rev-text { color: var(--slate-700); line-height: 1.5; }
+.result-actions {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 0 36px 36px;
+}
+.btn-action {
+  padding: 14px; border-radius: 11px;
+  font-family: var(--font-b); font-size: 15px; font-weight: 700;
+  cursor: pointer; border: none;
+  transition: transform .15s, opacity .15s;
+  text-align: center;
+}
+.btn-action:hover { transform:translateY(-1px); opacity:.9; }
+.ba-primary { background: #111; color: #fff; }
+.ba-outline { background: transparent; color: #111; border: 2px solid var(--slate-300); }
+.ba-report  { background: #f2eeff; color: #5B21B6; }
+
+/* ════════════════════════════════════
+   FULL REPORT
+════════════════════════════════════ */
+#s-report {
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 24px;
+  background: var(--bg);
+}
+.rp-wrap { max-width: 700px; width: 100%; }
+.rp-header {
+  background: linear-gradient(135deg, #111, #1e1b6e);
+  border-radius: 18px;
+  padding: 40px;
+  color: #fff; text-align: center;
+  margin-bottom: 24px;
+}
+.rp-header h2 {
+  font-family: var(--font-h); font-size: 28px; margin-bottom: 6px;
+}
+.rp-header .rp-meta { font-size: 13px; opacity: .65; margin-bottom: 20px; }
+.rp-pct { font-family: var(--font-h); font-size: 68px; line-height: 1; }
+.rp-sub { font-size: 14px; opacity: .75; margin-top: 6px; }
+.rp-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+.rp-card {
+  background: #fff; border-radius: 14px;
+  padding: 22px 20px; box-shadow: var(--shadow);
+  border-left: 4px solid transparent;
+}
+.rp-card .rc-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .7px;
+  text-transform: uppercase; color: var(--slate-500); margin-bottom: 6px;
+}
+.rp-card .rc-name {
+  font-family: var(--font-h); font-size: 16px;
+  color: #111; margin-bottom: 14px; line-height: 1.3;
+}
+.rp-card .rc-pct {
+  font-size: 36px; font-family: var(--font-h);
+  line-height: 1; margin-bottom: 2px;
+}
+.rp-card .rc-detail { font-size: 12px; color: var(--slate-500); margin-bottom: 10px; }
+.rc-bar { height: 5px; border-radius: 999px; background: var(--slate-100); overflow: hidden; }
+.rc-bar-fill { height: 100%; border-radius: 999px; }
+.rc-status { font-size: 11.5px; font-weight: 700; margin-top: 8px; }
+.rp-orient {
+  background: #fff; border-radius: 14px;
+  padding: 26px; box-shadow: var(--shadow);
+  margin-bottom: 24px;
+}
+.rp-orient h3 {
+  font-family: var(--font-h); font-size: 18px;
+  color: #111; margin-bottom: 16px;
+}
+.ori-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 0; border-bottom: 1px solid var(--slate-100);
+  font-size: 14px; color: var(--slate-700); line-height: 1.6;
+}
+.ori-item:last-child { border-bottom: none; }
+.ori-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 6px;
+}
+.btn-back-sel {
+  width: 100%; padding: 15px;
+  background: #111; color: #fff; border: none; border-radius: 11px;
+  font-family: var(--font-b); font-size: 16px; font-weight: 700;
+  cursor: pointer;
+  transition: background .18s;
+}
+.btn-back-sel:hover { background: #333; }
+
+/* ── UTILS ── */
+@media (max-width: 600px) {
+  .login-card { padding: 36px 24px; }
+  .iras-grid { grid-template-columns: 1fr; }
+  .quiz-body { padding: 28px 16px 60px; }
+  .q-text { font-size: 19px; }
+  .rp-cards { grid-template-columns: 1fr; }
+  .result-body, .result-actions { padding-left: 24px; padding-right: 24px; }
+  .result-hero { padding: 36px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ LOGIN ══════════ -->
+<div id="s-login" class="screen active">
+  <div class="login-bg"></div>
+  <div class="login-grid"></div>
+  <div class="login-card">
+    <div class="lc-eyebrow">🏥 FHO · Enf. Clínico-Cirúrgica II</div>
+    <h1 class="lc-title">Revisão de Medidas Preventivas em IRAS</h1>
+    <p class="lc-sub">Prof. Me. Felipe Bueno da Silva · Plataforma de questões interativas baseada na aula de IRAS.</p>
+    <div class="field">
+      <label for="f-nome">Nome Completo</label>
+      <input type="text" id="f-nome" placeholder="Digite seu nome completo">
+      <div class="field-err" id="e-nome">Campo obrigatório.</div>
+    </div>
+    <div class="field">
+      <label for="f-ra">RA — Registro Acadêmico</label>
+      <input type="text" id="f-ra" placeholder="Ex: 2024001234">
+      <div class="field-err" id="e-ra">Campo obrigatório.</div>
+    </div>
+    <div class="field">
+      <label for="f-turma">Turma</label>
+      <input type="text" id="f-turma" placeholder="Ex: Enf-2024-A">
+      <div class="field-err" id="e-turma">Campo obrigatório.</div>
+    </div>
+    <button class="btn-enter" onclick="doLogin()">Acessar Plataforma →</button>
+    <p class="lc-footer">Seus dados identificam seu desempenho. Nenhuma informação é enviada externamente.</p>
+  </div>
+</div>
+
+<!-- ══════════ SELECTION ══════════ -->
+<div id="s-select" class="screen">
+  <div class="select-header">
+    <div class="hi">Escolha o tema</div>
+    <h2>Qual IRAS você quer revisar hoje?</h2>
+    <p>Selecione um tipo de infecção para responder as questões focadas nas medidas preventivas.</p>
+  </div>
+  <div class="student-bar">
+    <div class="dot"></div>
+    <span>Aluno: <strong id="sb-name">—</strong> &nbsp;·&nbsp; RA: <strong id="sb-ra">—</strong> &nbsp;·&nbsp; Turma: <strong id="sb-turma">—</strong></span>
+  </div>
+  <div class="iras-grid">
+    <div class="iras-card isc" onclick="startQuiz('isc')">
+      <span class="ic-icon">🔪</span>
+      <div class="ic-label">ISC</div>
+      <div class="ic-title">Infecção de Sítio Cirúrgico</div>
+      <div class="ic-sub">Medidas pré e pós-operatórias, antibioticoprofilaxia, curativos e controle glicêmico.</div>
+      <div class="ic-count" id="badge-isc">3 questões</div>
+    </div>
+    <div class="iras-card pav" onclick="startQuiz('pav')">
+      <span class="ic-icon">🫁</span>
+      <div class="ic-label">PAV</div>
+      <div class="ic-title">Pneumonia Associada à Ventilação Mecânica</div>
+      <div class="ic-sub">Cabeceira, higiene oral, pressão de cuff, sedação mínima e circuito do ventilador.</div>
+      <div class="ic-count" id="badge-pav">3 questões</div>
+    </div>
+    <div class="iras-card itu" onclick="startQuiz('itu')">
+      <span class="ic-icon">🧪</span>
+      <div class="ic-label">ITU-CVD</div>
+      <div class="ic-title">ITU Associada ao Cateter Vesical</div>
+      <div class="ic-sub">Indicação correta, técnica asséptica, sistema fechado e avaliação diária do cateter.</div>
+      <div class="ic-count" id="badge-itu">3 questões</div>
+    </div>
+    <div class="iras-card ips" onclick="startQuiz('ips')">
+      <span class="ic-icon">💉</span>
+      <div class="ic-label">IPCS</div>
+      <div class="ic-title">Infecção de Corrente Sanguínea</div>
+      <div class="ic-sub">Barreira máxima, antissepsia com clorexidina, curativo do CVC e avaliação diária.</div>
+      <div class="ic-count" id="badge-ips">3 questões</div>
+    </div>
+  </div>
+  <div class="mix-card" onclick="startQuiz('mix')">
+    <div class="mix-icon">🔀</div>
+    <div class="mix-info">
+      <div class="mix-label">Modo completo</div>
+      <div class="mix-title">Todos os Tipos de IRAS</div>
+      <div class="mix-sub">12 questões misturadas cobrindo as 4 IRAS e todas as medidas preventivas.</div>
+    </div>
+  </div>
+  <div class="report-link" onclick="goReport()">📊 Ver relatório de desempenho</div>
+</div>
+
+<!-- ══════════ QUIZ ══════════ -->
+<div id="s-quiz" class="screen">
+  <div class="quiz-topbar">
+    <div class="qtb-back" onclick="backToSelect()">← Voltar</div>
+    <div class="qtb-iras">
+      <div class="qtb-dot" id="qtb-dot"></div>
+      <div>
+        <div class="qtb-name" id="qtb-name">—</div>
+        <div class="qtb-type" id="qtb-type">—</div>
+      </div>
+    </div>
+    <div class="qtb-progress">
+      <div class="qtb-counter" id="qtb-counter">1 / 8</div>
+      <div class="progress-pills" id="pills"></div>
+    </div>
+  </div>
+  <div class="quiz-body">
+    <div class="q-wrap" id="q-wrap"></div>
+  </div>
+</div>
+
+<!-- ══════════ RESULT ══════════ -->
+<div id="s-result" class="screen">
+  <div class="result-card" id="result-card">
+    <div class="result-hero" id="result-hero">
+      <h3 id="res-title">Resultado</h3>
+      <div class="score-ring">
+        <div class="sn" id="res-score">—</div>
+        <div class="sd" id="res-total">—</div>
+      </div>
+      <p class="result-msg" id="res-msg">—</p>
+    </div>
+    <div class="result-body">
+      <div class="q-review" id="res-review"></div>
+    </div>
+    <div class="result-actions">
+      <button class="btn-action ba-primary" id="btn-retry" onclick="retryCurrentQuiz()">↺ Refazer este quiz</button>
+      <button class="btn-action ba-outline" onclick="backToSelect()">← Escolher outra IRAS</button>
+      <button class="btn-action ba-report" onclick="goReport()">📊 Ver relatório completo</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ REPORT ══════════ -->
+<div id="s-report" class="screen">
+  <div class="rp-wrap">
+    <div class="rp-header">
+      <h2>Relatório de Desempenho</h2>
+      <div class="rp-meta" id="rp-meta">—</div>
+      <div class="rp-pct" id="rp-pct">—</div>
+      <div class="rp-sub" id="rp-sub">—</div>
+    </div>
+    <div class="rp-cards" id="rp-cards"></div>
+    <div class="rp-orient" id="rp-orient"></div>
+    <button class="btn-back-sel" onclick="backToSelect()">← Voltar à seleção</button>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════
+   QUESTION DATA
+═══════════════════════════════════════ */
+const IRAS = {
+  isc: {
+    label: 'ISC',
+    name: 'Infecção de Sítio Cirúrgico',
+    color: '#0D7C6A',
+    colorL: '#e6f4f1',
+    colorD: '#084f44',
+  },
+  pav: {
+    label: 'PAV',
+    name: 'Pneumonia Associada à VM',
+    color: '#3730A3',
+    colorL: '#eeeef9',
+    colorD: '#1e1b6e',
+  },
+  itu: {
+    label: 'ITU-CVD',
+    name: 'ITU Associada ao Cateter Vesical',
+    color: '#B45309',
+    colorL: '#fef3e2',
+    colorD: '#7c3a05',
+  },
+  ips: {
+    label: 'IPCS',
+    name: 'Infecção de Corrente Sanguínea',
+    color: '#B91C1C',
+    colorL: '#fef2f2',
+    colorD: '#7f1212',
+  },
+};
+
+const QDB = {
+  isc: [
+    {
+      type:'mc',
+      text:'A antibioticoprofilaxia cirúrgica deve ser administrada em qual momento para ser eficaz na prevenção de ISC?',
+      opts:['Imediatamente após a indução anestésica','30 a 60 minutos antes da incisão cirúrgica','2 horas antes da entrada no centro cirúrgico','No pós-operatório imediato, ao término do procedimento'],
+      ok:1,
+      fb:'A antibioticoprofilaxia deve ser administrada em dose única, de 30 a 60 minutos antes da incisão, garantindo nível sérico e tecidual adequado no momento exato do ato cirúrgico. Administrações fora dessa janela reduzem significativamente a eficácia.'
+    },
+    {
+      type:'tf',
+      text:'A tricotomia pré-operatória deve ser realizada preferencialmente com lâmina de barbear para garantir remoção mais completa dos pelos e melhor antissepsia do campo.',
+      opts:['Verdadeiro','Falso'],
+      ok:1,
+      fb:'Falso. A lâmina de barbear provoca microlesões na pele que aumentam o risco de ISC. A tricotomia deve ser realizada com máquina elétrica, se necessária, e preferencialmente o mais próximo possível do horário da cirurgia.'
+    },
+    {
+      type:'case',
+      caseText:'Um paciente será submetido a artroplastia total de joelho amanhã às 8h. O enfermeiro planeja os cuidados pré-operatórios: orientou o banho com clorexidina degermante na noite anterior e na manhã da cirurgia, programou o antibiótico profilático para as 7h30 e considera realizar a tricotomia com lâmina para garantir melhor remoção dos pelos da região.',
+      text:'Qual medida planejada pelo enfermeiro está INCORRETA e precisa ser corrigida?',
+      opts:['Orientar o banho com clorexidina degermante na noite anterior e na manhã da cirurgia','Administrar o antibiótico profilático às 7h30, antes da incisão das 8h','Realizar a tricotomia com lâmina de barbear para melhor remoção dos pelos','Manter controle glicêmico perioperatório com meta < 180 mg/dL'],
+      ok:2,
+      fb:'A medida incorreta é a tricotomia com lâmina de barbear. Lâminas causam microlesões cutâneas que aumentam o risco de ISC. A recomendação é utilizar máquina elétrica, se necessária. As demais medidas — banho com clorexidina em dois momentos, antibioticoprofilaxia dentro da janela de 30–60 min e controle glicêmico — estão corretas.'
+    },
+  ],
+  pav: [
+    {
+      type:'mc',
+      text:'Qual deve ser o ângulo de elevação da cabeceira e com qual frequência a pressão do cuff deve ser verificada para prevenção da PAV?',
+      opts:['Cabeceira 15–20°, cuff verificado 1× ao dia','Cabeceira 30–45°, cuff verificado 3× ao dia','Cabeceira 45–60°, cuff verificado 2× ao dia','Cabeceira 20–30°, cuff verificado 1× por turno'],
+      ok:1,
+      fb:'A cabeceira deve ser mantida entre 30 e 45 graus (exceto instabilidade hemodinâmica grave) e o cuff do tubo orotraqueal verificado 3 vezes ao dia, mantendo pressão entre 20 e 30 cmH₂O. Essas são duas das principais medidas do bundle de prevenção de PAV.'
+    },
+    {
+      type:'tf',
+      text:'Segundo as normas da ANVISA, o circuito do ventilador mecânico deve ser trocado rotineiramente a cada 48 horas como medida de prevenção da PAV.',
+      opts:['Verdadeiro','Falso'],
+      ok:1,
+      fb:'Falso. A ANVISA recomenda trocar o circuito SOMENTE quando houver sujidade visível ou na alta do paciente da UTI. Trocas rotineiras em intervalos fixos não são recomendadas e podem aumentar o risco de PAV ao romper o sistema fechado.'
+    },
+    {
+      type:'case',
+      caseText:'Durante a passagem de plantão em UTI, a enfermeira observa um paciente intubado há 72 horas com as seguintes condições: cabeceira a 20 graus, última higiene oral com clorexidina 0,12% registrada há 10 horas, pressão do cuff medida em 15 cmH₂O, e circuito do ventilador visivelmente limpo e sem sujidade.',
+      text:'Quantas não conformidades com o bundle de prevenção de PAV foram identificadas nessa situação?',
+      opts:['Nenhuma — todas as medidas estão adequadas','Uma não conformidade','Duas não conformidades','Três não conformidades'],
+      ok:3,
+      fb:'Foram identificadas três não conformidades: (1) cabeceira a 20° — deveria estar entre 30–45°; (2) higiene oral há 10 horas — deve ser realizada a cada 8 horas; (3) cuff a 15 cmH₂O — abaixo de 20 cmH₂O, predispondo à microaspiração de secreção subglótica. O circuito limpo não necessita troca, portanto está adequado.'
+    },
+  ],
+  itu: [
+    {
+      type:'tf',
+      text:'O cateter vesical de demora deve ser instalado de forma rotineira em todos os pacientes internados em UTI para facilitar o controle preciso do débito urinário.',
+      opts:['Verdadeiro','Falso'],
+      ok:1,
+      fb:'Falso. O cateterismo vesical de demora deve ser indicado somente quando estritamente necessário, com justificativa documentada. A indicação indiscriminada é a principal causa do elevado número de ITU-CVD, responsável por 30 a 40% de todas as IRAS hospitalares.'
+    },
+    {
+      type:'mc',
+      text:'Qual é o posicionamento correto da bolsa coletora e com qual frequência ela deve ser esvaziada para prevenção de ITU-CVD?',
+      opts:['No mesmo nível da bexiga; esvaziar quando estiver cheia','Acima da bexiga; esvaziar a cada 4 horas','Sempre abaixo da bexiga; esvaziar antes de atingir ¾ da capacidade','Ao nível do joelho; esvaziar 1 vez por turno'],
+      ok:2,
+      fb:'A bolsa coletora deve ser mantida sempre abaixo do nível da bexiga para garantir drenagem gravitacional e impedir refluxo. Deve ser esvaziada antes de atingir ¾ de sua capacidade total para evitar estase e pressão retrógrada sobre o sistema.'
+    },
+    {
+      type:'case',
+      caseText:'Paciente de 68 anos, pós-operatório de prostatectomia radical, com cateter vesical de demora há 5 dias. Durante a ronda, a residente observa: bolsa coletora posicionada no mesmo nível da bexiga, cateter com dobra discreta no trajeto reduzindo o fluxo, e bolsa com volume correspondente a aproximadamente ¾ de sua capacidade máxima.',
+      text:'Quantas não conformidades com as medidas de manutenção do cateter vesical foram identificadas?',
+      opts:['Nenhuma — todos os aspectos estão adequados','Uma não conformidade apenas','Duas não conformidades','Três não conformidades'],
+      ok:3,
+      fb:'Foram identificadas três não conformidades: (1) bolsa no nível da bexiga — deveria estar sempre abaixo; (2) cateter com dobra — não deve ser dobrado, comprimido ou ocluído; (3) bolsa atingindo ¾ da capacidade — deve ser esvaziada antes de atingir esse volume para evitar refluxo e estase urinária.'
+    },
+  ],
+  ips: [
+    {
+      type:'mc',
+      text:'Qual antisséptico, concentração e tempo mínimo de contato são recomendados para antissepsia do sítio de inserção do CVC para prevenção de IPCS?',
+      opts:['PVPI aquoso 10% — 15 segundos','Álcool 70% isolado — 20 segundos','Clorexidina alcoólica 0,5% — 30 segundos','Clorexidina aquosa 2% — 60 segundos'],
+      ok:2,
+      fb:'A antissepsia para inserção do CVC deve ser realizada com clorexidina alcoólica 0,5%, aguardando tempo mínimo de 30 segundos de contato (e secagem completa) antes da inserção. A clorexidina alcoólica tem ação bactericida mais rápida e residual superior ao PVPI e ao álcool isolado.'
+    },
+    {
+      type:'mc',
+      text:'Com qual frequência deve ser trocado o curativo de poliuretano transparente no sítio de inserção do CVC?',
+      opts:['A cada 24 a 48 horas ou se úmido','A cada 3 dias independentemente do aspecto','A cada 7 dias ou se úmido, solto ou com sujidade visível','Apenas quando houver sinais locais de infecção'],
+      ok:2,
+      fb:'O curativo de poliuretano transparente deve ser trocado a cada 7 dias ou imediatamente se estiver úmido, solto ou com sujidade visível. Já o curativo com gaze e fita adesiva deve ser trocado a cada 24 a 48 horas. A troca desnecessária aumenta o risco de contaminação do sítio de inserção.'
+    },
+    {
+      type:'case',
+      caseText:'Paciente em UTI com CVC em veia jugular interna direita há 3 dias apresenta eritema, calor e secreção purulenta no sítio de inserção, febre de 38,6°C e calafrios. O médico suspeita de IPCS e prescreve antibioticoterapia empírica a ser iniciada imediatamente.',
+      text:'Qual é a conduta de enfermagem PRIORITÁRIA a ser realizada ANTES de administrar o antibiótico prescrito?',
+      opts:['Realizar troca imediata do CVC por fio guia e enviar a ponta para cultura','Coletar hemoculturas periféricas antes de iniciar o antibiótico','Trocar o curativo do CVC com técnica asséptica e reavaliar em 6 horas','Solicitar apenas cultura da ponta do cateter após retirada, sem hemoculturas'],
+      ok:1,
+      fb:'A conduta prioritária é coletar hemoculturas periféricas ANTES de administrar o antibiótico. A administração prévia do antimicrobiano pode negativar os resultados e dificultar a identificação do agente etiológico, comprometendo a definição da antibioticoterapia definitiva.'
+    },
+  ],
+};
+
+// Gerar mix aleatório
+function genMix() {
+  const all = [];
+  ['isc','pav','itu','ips'].forEach(k => QDB[k].forEach((q,i) => all.push({...q, _iras:k, _idx:i})));
+  return all.sort(() => Math.random() - .5);
+}
+
+/* ═══════════════════════════════════════
+   STATE
+═══════════════════════════════════════ */
+const ST = {
+  student: {name:'', ra:'', turma:''},
+  currentIras: null,   // 'isc'|'pav'|'itu'|'ips'|'mix'
+  questions: [],
+  qIdx: 0,
+  answered: false,
+  sessionLog: [],      // {iras, qIdx, isCorrect}
+  scores: {},          // iras -> {correct, total}
+};
+
+/* ═══════════════════════════════════════
+   SCREENS
+═══════════════════════════════════════ */
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('s-'+id).classList.add('active');
+}
+
+/* ═══════════════════════════════════════
+   LOGIN
+═══════════════════════════════════════ */
+function doLogin() {
+  const nome  = document.getElementById('f-nome').value.trim();
+  const ra    = document.getElementById('f-ra').value.trim();
+  const turma = document.getElementById('f-turma').value.trim();
+  let ok = true;
+  [['nome',nome],['ra',ra],['turma',turma]].forEach(([k,v]) => {
+    document.getElementById('f-'+k).classList.toggle('err', !v);
+    document.getElementById('e-'+k).classList.toggle('show', !v);
+    if (!v) ok = false;
+  });
+  if (!ok) return;
+  ST.student = {name:nome, ra, turma};
+  document.getElementById('sb-name').textContent = nome;
+  document.getElementById('sb-ra').textContent = ra;
+  document.getElementById('sb-turma').textContent = turma;
+  show('select');
+  updateBadges();
+}
+
+['f-nome','f-ra','f-turma'].forEach(id => {
+  document.getElementById(id).addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+});
+
+/* ═══════════════════════════════════════
+   SELECTION
+═══════════════════════════════════════ */
+function updateBadges() {
+  ['isc','pav','itu','ips'].forEach(k => {
+    const s = ST.scores[k];
+    const badge = document.getElementById('badge-'+k);
+    if (s) {
+      badge.textContent = `${s.correct}/${s.total} acertos`;
+      badge.style.background = s.correct === s.total ? '#e6f4f1' : '#fef3e2';
+      badge.style.color = s.correct === s.total ? '#0D7C6A' : '#B45309';
+    }
+  });
+}
+
+function backToSelect() {
+  show('select');
+  updateBadges();
+}
+
+/* ═══════════════════════════════════════
+   QUIZ START
+═══════════════════════════════════════ */
+function startQuiz(irasKey) {
+  ST.currentIras = irasKey;
+  ST.questions = irasKey === 'mix' ? genMix() : [...QDB[irasKey]];
+  ST.qIdx = 0;
+  ST.answered = false;
+  ST.sessionLog = [];
+
+  // Topbar
+  const meta = irasKey === 'mix'
+    ? {label:'MIX', name:'Todos os Tipos de IRAS', color:'#5B21B6'}
+    : IRAS[irasKey];
+  document.getElementById('qtb-dot').style.background = meta.color;
+  document.getElementById('qtb-name').textContent = meta.label;
+  document.getElementById('qtb-type').textContent = meta.name;
+
+  show('quiz');
+  renderQ();
+}
+
+/* ═══════════════════════════════════════
+   RENDER QUESTION
+═══════════════════════════════════════ */
+function renderQ() {
+  const q = ST.questions[ST.qIdx];
+  const total = ST.questions.length;
+  ST.answered = false;
+
+  // Counter
+  document.getElementById('qtb-counter').textContent = `${ST.qIdx+1} / ${total}`;
+
+  // Pills
+  const pillsEl = document.getElementById('pills');
+  pillsEl.innerHTML = ST.questions.map((_,i) => {
+    let cls = 'pill';
+    if (i < ST.qIdx) {
+      cls += ST.sessionLog[i]?.isCorrect ? ' done-c' : ' done-w';
+    } else if (i === ST.qIdx) {
+      cls += ' current';
+    }
+    return `<div class="${cls}"></div>`;
+  }).join('');
+
+  // Type tag
+  const tagClass = q.type === 'mc' ? 'mc' : q.type === 'tf' ? 'tf' : 'case';
+  const tagLabel = q.type === 'mc' ? 'Múltipla Escolha' : q.type === 'tf' ? 'Verdadeiro ou Falso' : 'Estudo de Caso';
+  const letters = ['A','B','C','D'];
+
+  const caseHTML = q.type === 'case' ? `<div class="case-box">${q.caseText}</div>` : '';
+
+  // IRAS color (for mixed)
+  const irasKey = q._iras || ST.currentIras;
+  const irasColor = irasKey !== 'mix' ? IRAS[irasKey]?.color || '#5B21B6' : '#5B21B6';
+
+  const optsHTML = q.opts.map((o,i) => `
+    <div class="opt" id="opt${i}" onclick="pick(${i})">
+      <div class="opt-key">${q.type==='tf' ? (i===0?'V':'F') : letters[i]}</div>
+      <span>${o}</span>
+    </div>
+  `).join('');
+
+  document.getElementById('q-wrap').innerHTML = `
+    <div class="q-tag ${tagClass}">${tagLabel}</div>
+    ${caseHTML}
+    <div class="q-text">${q.text}</div>
+    <div class="opts" id="opts">${optsHTML}</div>
+    <div class="fb" id="fb">
+      <div class="fb-head" id="fb-head"></div>
+      <div class="fb-text" id="fb-text"></div>
+    </div>
+    <div class="clearfix">
+      <button class="btn-next" id="btn-next" onclick="nextQ()">
+        ${ST.qIdx+1 < ST.questions.length ? 'Próxima →' : 'Ver resultado →'}
+      </button>
+    </div>
+  `;
+}
+
+function pick(sel) {
+  if (ST.answered) return;
+  ST.answered = true;
+
+  const q = ST.questions[ST.qIdx];
+  const isCorrect = sel === q.ok;
+
+  ST.sessionLog.push({isCorrect, irasKey: q._iras || ST.currentIras});
+
+  // Style options
+  q.opts.forEach((_,i) => {
+    const el = document.getElementById('opt'+i);
+    el.classList.add('dis');
+    if (i === q.ok) el.classList.add('ok');
+    else if (i === sel && !isCorrect) el.classList.add('err');
+  });
+
+  // Feedback
+  const fbEl = document.getElementById('fb');
+  document.getElementById('fb-head').innerHTML = isCorrect
+    ? '✅ Resposta correta!'
+    : '❌ Resposta incorreta';
+  document.getElementById('fb-text').textContent = q.fb;
+  fbEl.className = 'fb show ' + (isCorrect ? 'ok' : 'ng');
+
+  // Next button
+  document.getElementById('btn-next').classList.add('show');
+
+  // Update pills
+  const pillsEl = document.getElementById('pills');
+  const pills = pillsEl.querySelectorAll('.pill');
+  if (pills[ST.qIdx]) {
+    pills[ST.qIdx].className = 'pill ' + (isCorrect ? 'done-c' : 'done-w');
+  }
+}
+
+function nextQ() {
+  ST.qIdx++;
+  if (ST.qIdx < ST.questions.length) {
+    renderQ();
+  } else {
+    finishQuiz();
+  }
+}
+
+/* ═══════════════════════════════════════
+   FINISH QUIZ
+═══════════════════════════════════════ */
+function finishQuiz() {
+  const irasKey = ST.currentIras;
+  const total = ST.sessionLog.length;
+  const correct = ST.sessionLog.filter(l => l.isCorrect).length;
+  const pct = Math.round((correct/total)*100);
+
+  // Save score (per IRAS)
+  if (irasKey === 'mix') {
+    // Split by IRAS
+    ['isc','pav','itu','ips'].forEach(k => {
+      const sub = ST.sessionLog.filter(l => l.irasKey === k);
+      if (sub.length) {
+        ST.scores[k] = {
+          correct: sub.filter(l=>l.isCorrect).length,
+          total: sub.length
+        };
+      }
+    });
+  } else {
+    ST.scores[irasKey] = {correct, total};
+  }
+
+  // Result screen
+  const meta = irasKey === 'mix'
+    ? {label:'Resultado Geral', name:'Todos os tipos de IRAS', color:'#5B21B6', colorL:'#f2eeff', colorD:'#3b1280'}
+    : {...IRAS[irasKey], label: IRAS[irasKey].label+' — '+IRAS[irasKey].name};
+
+  let msg = '';
+  if (pct === 100) msg = 'Perfeito! Você domina todas as medidas preventivas deste módulo. Continue assim!';
+  else if (pct >= 75) msg = 'Muito bom desempenho! Revise as questões incorretas antes de avançar.';
+  else if (pct >= 50) msg = 'Desempenho razoável. Recomenda-se refazer o quiz após revisar as medidas preventivas.';
+  else msg = 'Revise com atenção as medidas preventivas para esta IRAS e repita as questões.';
+
+  document.getElementById('result-hero').style.background =
+    `linear-gradient(135deg, ${meta.colorD}, ${meta.color})`;
+  document.getElementById('res-title').textContent = meta.label;
+  document.getElementById('res-score').textContent = correct;
+  document.getElementById('res-total').textContent = `de ${total}`;
+
+  // Q review
+  const reviewHTML = ST.sessionLog.map((log, i) => {
+    const q = ST.questions[i];
+    return `<div class="q-review-item">
+      <div class="q-rev-icon">${log.isCorrect ? '✅' : '❌'}</div>
+      <div class="q-rev-text"><strong>Q${i+1}.</strong> ${q.text.substring(0,90)}${q.text.length>90?'…':''}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('res-msg').textContent = `${pct}% de acerto · ${msg}`;
+  document.getElementById('res-review').innerHTML = reviewHTML;
+
+  show('result');
+}
+
+function retryCurrentQuiz() {
+  startQuiz(ST.currentIras);
+}
+
+/* ═══════════════════════════════════════
+   FULL REPORT
+═══════════════════════════════════════ */
+function goReport() {
+  const keys = ['isc','pav','itu','ips'];
+  const done = keys.filter(k => ST.scores[k]);
+  const totalQ = done.reduce((s,k) => s + ST.scores[k].total, 0);
+  const totalC = done.reduce((s,k) => s + ST.scores[k].correct, 0);
+  const globalPct = totalQ > 0 ? Math.round((totalC/totalQ)*100) : null;
+
+  document.getElementById('rp-meta').textContent =
+    `${ST.student.name} · RA ${ST.student.ra} · Turma ${ST.student.turma}`;
+
+  if (globalPct !== null) {
+    document.getElementById('rp-pct').textContent = globalPct + '%';
+    document.getElementById('rp-sub').textContent =
+      `${totalC} acerto(s) de ${totalQ} questões · ${done.length}/4 módulos realizados`;
+  } else {
+    document.getElementById('rp-pct').textContent = '—';
+    document.getElementById('rp-sub').textContent = 'Nenhum módulo realizado ainda.';
+  }
+
+  const cardsHTML = keys.map(k => {
+    const info = IRAS[k];
+    const s = ST.scores[k];
+    if (!s) {
+      return `<div class="rp-card" style="border-left-color:#ddd; opacity:.55;">
+        <div class="rc-label">${info.label}</div>
+        <div class="rc-name">${info.name}</div>
+        <div class="rc-pct" style="color:#aaa;">—</div>
+        <div class="rc-detail">Não realizado</div>
+        <div class="rc-bar"><div class="rc-bar-fill" style="width:0%;background:#ddd;"></div></div>
+        <div class="rc-status" style="color:#aaa;">Acesse o quiz para avaliar</div>
+      </div>`;
+    }
+    const pct = Math.round((s.correct/s.total)*100);
+    const statusTxt = pct===100 ? '✓ Excelente' : pct>=75 ? '↗ Bom desempenho' : pct>=50 ? '! Revisão recomendada' : '✕ Revisão necessária';
+    const statusColor = pct>=75 ? info.color : pct>=50 ? '#B45309' : '#B91C1C';
+    return `<div class="rp-card" style="border-left-color:${info.color};">
+      <div class="rc-label">${info.label}</div>
+      <div class="rc-name">${info.name}</div>
+      <div class="rc-pct" style="color:${info.color};">${pct}%</div>
+      <div class="rc-detail">${s.correct} acerto(s) de ${s.total} questões</div>
+      <div class="rc-bar"><div class="rc-bar-fill" style="width:${pct}%;background:${info.color};"></div></div>
+      <div class="rc-status" style="color:${statusColor};">${statusTxt}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('rp-cards').innerHTML = cardsHTML;
+
+  // Orientação
+  const needsReview = done.filter(k => {
+    const s = ST.scores[k]; return s && Math.round((s.correct/s.total)*100) < 75;
+  });
+  const notDone = keys.filter(k => !ST.scores[k]);
+  let oriHTML = '<h3>📋 Orientações de Estudo</h3>';
+
+  if (!done.length) {
+    oriHTML += `<div class="ori-item"><div class="ori-dot" style="background:#aaa;"></div>Inicie pelos quizzes para obter seu relatório de desempenho.</div>`;
+  } else {
+    if (needsReview.length) {
+      needsReview.forEach(k => {
+        const s = ST.scores[k];
+        const pct = Math.round((s.correct/s.total)*100);
+        oriHTML += `<div class="ori-item">
+          <div class="ori-dot" style="background:${IRAS[k].color};"></div>
+          <span><strong>${IRAS[k].label} — ${IRAS[k].name}:</strong> ${pct}% de acerto. Revise as medidas preventivas e refaça as questões.</span>
+        </div>`;
+      });
+    } else {
+      oriHTML += `<div class="ori-item"><div class="ori-dot" style="background:#0D7C6A;"></div>✓ Excelente desempenho em todos os módulos realizados!</div>`;
+    }
+    if (notDone.length) {
+      notDone.forEach(k => {
+        oriHTML += `<div class="ori-item">
+          <div class="ori-dot" style="background:#aaa;"></div>
+          <span><strong>${IRAS[k].label}:</strong> quiz ainda não realizado. Complete todos os módulos para um relatório completo.</span>
+        </div>`;
+      });
+    }
+  }
+
+  document.getElementById('rp-orient').innerHTML = oriHTML;
+  show('report');
+}
+</script>
+</body>
+</html>
